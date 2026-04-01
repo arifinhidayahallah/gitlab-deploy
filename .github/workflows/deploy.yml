@@ -25,7 +25,7 @@ jobs:
 
       - name: Sync
         env:
-          dest: "ubuntu@54.251.5.36:~/prod.kelasdevops.xyz/"
+          dest: "deployer@localhost:/var/www/gitlab-deploy/"
         run: |
           echo "${{ secrets.DEPLOY_KEY }}" > ~/deploy_key
           chmod 600 ~/deploy_key
