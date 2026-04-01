@@ -1,0 +1,17 @@
+stages:
+  - deploy
+
+deploy_to_production:
+  stage: deploy
+  script:
+    # 1. Daftarkan localhost:2222 ke daftar host yang dipercaya (agar tidak ditanya yes/no lagi)
+    - mkdir -p ~/.ssh
+    - ssh-keyscan -p 2222 localhost >> ~/.ssh/known_hosts
+    
+    # 2. Install dependencies
+    - composer install --no-interaction --prefer-dist
+    
+    # 3. Jalankan Envoy
+    - ./vendor/bin/envoy run deploy
+  only:
+    - main
